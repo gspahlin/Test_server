@@ -9,9 +9,13 @@ s_data = sample_data.to_dict()
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=["GET"])
 def home():
-    return jsonify(s_data)
+    response = jsonify(s_data)
+    # Enable Access-Control-Allow-Origin
+    response.headers.add("Access-Control-Allow-Origin", "*")
+
+    return response
 
 if __name__ == '__main__':
     app.run(debug = True)
